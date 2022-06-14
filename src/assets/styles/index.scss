@@ -61,6 +61,9 @@ p {
 
     line-height: 18px;
 }
+.MuiTableSortLabel-icon {
+    display: none !important;
+}
 
 // Grid Control
 @media (min-width: 1200px) {

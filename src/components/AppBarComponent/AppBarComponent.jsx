@@ -7,36 +7,9 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { showSnackBar } from '../../store/slices/snackbar.slice';
 import Container from '@mui/material/Container';
-import { APP_CONSTANTS } from '../../config/config';
-import { isUserLogOut } from '../../store/slices/logout.slice';
 
 export default function PrimarySearchAppBar({ children, to, ...props }) {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-
-    const snackbarObject = {
-        type: '',
-        message: '',
-        open: false,
-    };
-    const dispatchSnackBar = (type, message, open) => {
-        snackbarObject.type = type;
-        snackbarObject.message = message;
-        snackbarObject.open = open;
-        dispatch(showSnackBar(snackbarObject));
-    };
-
-    const logout = () => {
-        dispatch(isUserLogOut({ userLogOut: true }));
-        localStorage.clear();
-        dispatchSnackBar('success', 'Logout Successfully', true);
-        navigate('/login');
-    };
-
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -73,9 +46,7 @@ export default function PrimarySearchAppBar({ children, to, ...props }) {
             <li className="nav-link">
                 <NavLink to="/members">Products</NavLink>
             </li>
-            <li className="nav-link">
-                <NavLink to="/questions">Cart</NavLink>
-            </li>
+
             <li className="nav-link">
                 <NavLink to="/questions">LogOut</NavLink>
             </li>
@@ -105,9 +76,7 @@ export default function PrimarySearchAppBar({ children, to, ...props }) {
                             <li className="nav-link">
                                 <NavLink to="/products">Products</NavLink>
                             </li>
-                            <li className="nav-link">
-                                <NavLink to="/questions">Cart </NavLink>
-                            </li>
+
                             <li className="nav-link">
                                 <NavLink to="/offers">Logout</NavLink>
                             </li>

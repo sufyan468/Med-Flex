@@ -2,8 +2,6 @@ import React, { Fragment, useState } from 'react';
 import { Grid, Typography, Box, TextField, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 import CssBaseline from '@mui/material/CssBaseline';
-// import LazyLoading from '../General/LazyLoading/LazyLoading';
-import Footer from '../../components/Footer/Footer';
 import AppLogo from '../../components/General/LazyLoading/AppLogo';
 
 const defaultFormInput = {
