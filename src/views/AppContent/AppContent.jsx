@@ -16,7 +16,7 @@ const AppContent = ({ routes }) => {
     return (
         <Fragment>
             {location.pathname !== '/login' &&
-            location.pathname !== '/signUp' &&
+            location.pathname !== '/signup' &&
             location.pathname !== undefined &&
             location.pathname !== '/' ? (
                 <AppBarComponent />

@@ -15,8 +15,12 @@ const usersSlice = createSlice({
             const userData = action.payload;
             state.userObj = userData;
         },
+        loginUser(state, action) {},
+        setLoginUser(state, action) {
+            const userData = action.payload;
+        },
     },
 });
-export const { setUser, getUser } = usersSlice.actions;
+export const { getUser, setUser, loginUser, setLoginUser } = usersSlice.actions;
 
 export default usersSlice.reducer;
