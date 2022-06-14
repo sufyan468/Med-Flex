@@ -41,7 +41,6 @@ const Signup = () => {
         snackbarObject.type = type;
         snackbarObject.message = message;
         snackbarObject.open = open;
-
         dispatch(showSnackBar(snackbarObject));
     };
 

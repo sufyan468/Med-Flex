@@ -1,11 +1,58 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { Grid, Typography, Button, Box, TextField } from '@mui/material';
-import { Link } from 'react-router-dom';
 import CssBaseline from '@mui/material/CssBaseline';
 import Footer from '../Footer/Footer';
 import AppLogo from '../General/LazyLoading/AppLogo';
+import { useDispatch, useSelector } from 'react-redux';
+import { showSnackBar } from '../../store/slices/snackbar.slice';
+import { loginUser } from '../../store/slices/user.slice';
 
+const defaultFormInput = {
+    email: '',
+    password: '',
+};
 const LoginPage = (props) => {
+    const dispatch = useDispatch();
+    const [formInput, setFormInput] = useState(defaultFormInput);
+
+    const snackbarObject = {
+        type: '',
+        message: '',
+        open: false,
+    };
+
+    const handleInputChange = (name, value) => {
+        setFormInput({
+            ...formInput,
+            [name]: value,
+        });
+    };
+
+    const dispatchSnackBar = (type, message, open) => {
+        snackbarObject.type = type;
+        snackbarObject.message = message;
+        snackbarObject.open = open;
+
+        dispatch(showSnackBar(snackbarObject));
+    };
+
+    const handleLogin = (e) => {
+        e.stopPropagation();
+        const loginUserObject = {
+            email: formInput.email,
+            password: formInput.password,
+        };
+
+        if (loginUserObject.email === '') {
+            dispatchSnackBar('error', 'Please enter email', true);
+        } else if (loginUserObject.password === '') {
+            dispatchSnackBar('error', 'Please enter password', true);
+        } else {
+            dispatch(loginUser({ loginUserObject }));
+            dispatchSnackBar('success', 'User created successfully', true);
+        }
+    };
+
     return (
         <Fragment>
             <Fragment>
@@ -33,6 +80,7 @@ const LoginPage = (props) => {
                                     name="email"
                                     autoComplete="email"
                                     variant="standard"
+                                    onChange={(e) => handleInputChange(e.target.name, e.target.value)}
                                 />
                                 <TextField
                                     fullWidth
@@ -40,7 +88,9 @@ const LoginPage = (props) => {
                                     id="email"
                                     name="password"
                                     autoComplete="password"
+                                    type="password"
                                     variant="standard"
+                                    onChange={(e) => handleInputChange(e.target.name, e.target.value)}
                                 />
                                 <Box sx={{ mt: 4, textAlign: 'right' }}>
                                     <Button
@@ -49,6 +99,7 @@ const LoginPage = (props) => {
                                         variant="contained"
                                         sx={{ float: 'right' }}
                                         style={{ padding: '0rem 3rem' }}
+                                        onClick={(e) => handleLogin(e)}
                                     >
                                         Sign In
                                     </Button>

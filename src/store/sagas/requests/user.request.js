@@ -14,3 +14,14 @@ export function getUser(data) {
 
     return axios(config);
 }
+
+export function loginUserRequest(data) {
+    // return axios.post(`${API_URL}api/auth/login`, data);
+    console.log('login data', data);
+    var config = {
+        method: 'post',
+        url: `${API_URL}api/auth/login`,
+        data: data,
+    };
+    return axios(config);
+}
