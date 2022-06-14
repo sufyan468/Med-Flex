@@ -1,0 +1,27 @@
+/*  --------------
+    background: linear-gradient(to top, #0099ffcc, #0099ffcc), url(../../images/forgotpsw.png) no-repeat top center;
+    IF you want to add background image use this
+    --------------  */
+.rightSide {
+    background: linear-gradient(to top, #0099ffcc, #1465c0), url(../../images/RigthSide.png) no-repeat top center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.btnGroupRight {
+    border-right: 0px !important;
+}
+@media (max-width: 440px) {
+    .FllWidthBtn {
+        width: 100%;
+    }
+}
+
+.banner-image {
+    background-image: linear-gradient(to right, rgba(3, 37, 65, 0.8) 0%, rgba(3, 37, 65, 0) 100%),
+        url('https://www.themoviedb.org/t/p/w1920_and_h600_multi_faces_filter(duotone,032541,01b4e4)/uozb2VeD87YmhoUP1RrGWfzuCrr.jpg');
+    padding: 3rem 2rem;
+}
+.MuiOutlinedInput-notchedOutline {
+    border: none !important;
+}
