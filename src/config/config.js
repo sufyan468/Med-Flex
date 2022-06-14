@@ -6,5 +6,5 @@ export const APP_CONSTANTS = {
 };
 
 export const API_CONSTANTS = {
-    API_URL: 'http://localhost:3000/',
+    API_URL: 'https://7f67-86-99-152-60.in.ngrok.io/',
 };

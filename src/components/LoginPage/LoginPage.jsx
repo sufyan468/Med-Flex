@@ -2,7 +2,6 @@ import React, { Fragment } from 'react';
 import { Grid, Typography, Button, Box, TextField } from '@mui/material';
 import { Link } from 'react-router-dom';
 import CssBaseline from '@mui/material/CssBaseline';
-// import LazyLoading from '../General/LazyLoading/LazyLoading';
 import Footer from '../Footer/Footer';
 import AppLogo from '../General/LazyLoading/AppLogo';
 
@@ -44,11 +43,6 @@ const LoginPage = (props) => {
                                     variant="standard"
                                 />
                                 <Box sx={{ mt: 4, textAlign: 'right' }}>
-                                    <Button type="button" className="button-transparent">
-                                        <Link style={{ textDecoration: 'none' }} color="white" to="/forgot-password">
-                                            Forgot Password
-                                        </Link>
-                                    </Button>
                                     <Button
                                         type="button"
                                         className="button-primary FllWidthBtn"
@@ -59,11 +53,16 @@ const LoginPage = (props) => {
                                         Sign In
                                     </Button>
                                 </Box>
-                                <Box sx={{ pt: 4 }}>
+                                <Box sx={{ pt: '10rem', textAlign: 'center' }} className="w-100">
                                     <p>
-                                        Don't have an account{' '}
+                                        Don't have an account {''}
                                         <span>
-                                            <a href="/signup">Click here for Signup</a>
+                                            <a
+                                                href="/signup"
+                                                style={{ color: '#1565c0', fontWeight: 'bold', textDecoration: 'none' }}
+                                            >
+                                                Click here for Signup
+                                            </a>
                                         </span>
                                     </p>
                                 </Box>

@@ -1,19 +1,26 @@
-import React, { Fragment, useState } from 'react';
-import { Grid, Typography, Box, TextField, Button } from '@mui/material';
-import { Link } from 'react-router-dom';
+import React, { Fragment, useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUser } from '../../store/slices/user.slice';
 import CssBaseline from '@mui/material/CssBaseline';
 import AppLogo from '../../components/General/LazyLoading/AppLogo';
+import { Grid, Typography, Box, TextField, Button } from '@mui/material';
+import { Link } from 'react-router-dom';
+import { showSnackBar } from '../../store/slices/snackbar.slice';
 
 const defaultFormInput = {
-    firstName: '',
-    lastName: '',
-    userName: '',
+    first_name: '',
+    last_name: '',
+    username: '',
     email: '',
     password: '',
 };
 
 const Signup = () => {
     const [formInput, setFormInput] = useState(defaultFormInput);
+
+    const dispatch = useDispatch();
+
+    const data = useSelector((state) => state.user);
 
     const handleInputChange = (name, value) => {
         setFormInput({
@@ -22,16 +29,50 @@ const Signup = () => {
         });
     };
 
-    // const handleLogin = (e) => {
-    //     e.stopPropagation();
-    //     const signinDataObject = {
-    //         email: formInput.email,
-    //         password: formInput.password,
-    //     };
+    // SnackBar Object
+    const snackbarObject = {
+        type: '',
+        message: '',
+        open: false,
+    };
+
+    // SnackBar
+    const dispatchSnackBar = (type, message, open) => {
+        snackbarObject.type = type;
+        snackbarObject.message = message;
+        snackbarObject.open = open;
+
+        dispatch(showSnackBar(snackbarObject));
+    };
+
+    const handleSignUp = (e) => {
+        e.stopPropagation();
+        const signUPDataObject = {
+            first_name: formInput.first_name,
+            last_name: formInput.last_name,
+            username: formInput.username,
+            email: formInput.email,
+            password: formInput.password,
+        };
+
+        if (signUPDataObject.first_name === '') {
+            dispatchSnackBar('error', 'Please enter First Name', true);
+        } else if (signUPDataObject.last_name === '') {
+            dispatchSnackBar('error', 'Please enter Last Name', true);
+        } else if (signUPDataObject.username === '') {
+            dispatchSnackBar('error', 'Please enter username', true);
+        } else if (signUPDataObject.email === '') {
+            dispatchSnackBar('error', 'Please enter email', true);
+        } else if (signUPDataObject.password === '') {
+            dispatchSnackBar('error', 'Please enter password', true);
+        } else {
+            dispatch(getUser(signUPDataObject));
+            dispatchSnackBar('success', 'User created successfully', true);
+        }
+    };
 
     return (
         <Fragment>
-            {/* <Suspense fallback={<LazyLoading />}> */}
             <Grid container component="main" sx={{ height: '150vh' }}>
                 <CssBaseline />
                 <Grid
@@ -51,7 +92,7 @@ const Signup = () => {
                             <TextField
                                 sx={{ mb: 2 }}
                                 onChange={(e) => handleInputChange(e.target.name, e.target.value)}
-                                value={formInput.firstName}
+                                value={formInput.first_name}
                                 fullWidth
                                 id="first_name"
                                 label="First Name"
@@ -62,7 +103,7 @@ const Signup = () => {
                             <TextField
                                 sx={{ mb: 2 }}
                                 onChange={(e) => handleInputChange(e.target.name, e.target.value)}
-                                value={formInput.lastName}
+                                value={formInput.last_name}
                                 fullWidth
                                 id="last_name"
                                 label="Last Name"
@@ -74,7 +115,7 @@ const Signup = () => {
                             <TextField
                                 sx={{ mb: 2 }}
                                 onChange={(e) => handleInputChange(e.target.name, e.target.value)}
-                                value={formInput.userName}
+                                value={formInput.username}
                                 fullWidth
                                 id="username"
                                 label="Username"
@@ -114,7 +155,7 @@ const Signup = () => {
                                     type="button"
                                     className="button-primary FllWidthBtn"
                                     variant="contained"
-                                    // onClick={(e) => handleLogin(e)}
+                                    onClick={(e) => handleSignUp(e)}
                                     sx={{ float: 'right' }}
                                     style={{ padding: '0rem 3rem' }}
                                 >
@@ -126,8 +167,6 @@ const Signup = () => {
                 </Grid>
                 <Grid item xs={12} sm={12} md={7} className="rightSide" />
             </Grid>
-
-            {/* </Suspense> */}
         </Fragment>
     );
 };

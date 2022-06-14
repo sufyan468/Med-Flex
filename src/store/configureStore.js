@@ -2,11 +2,13 @@ import { configureStore, combineReducers, getDefaultMiddleware } from '@reduxjs/
 import createSagaMiddleware from 'redux-saga';
 import { watcherSaga } from './sagas/rootSaga';
 import snackbarReducer from './slices/snackbar.slice';
+import userReducer from './slices/user.slice';
 
 const sagaMiddleware = createSagaMiddleware();
 
 const reducer = combineReducers({
     snackbar: snackbarReducer,
+    user: userReducer,
 });
 
 const store = configureStore({
