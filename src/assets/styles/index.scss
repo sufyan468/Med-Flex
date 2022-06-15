@@ -71,6 +71,39 @@ p {
         max-width: 1260px;
     }
 }
+
+@media (max-width: 767px) {
+    .Dialog-chappy {
+        padding: 1.5rem 1rem !important;
+    }
+    .MuiDialogActions-root  {
+        border-top: 1px solid #D8D8D8;
+        padding:  1rem;
+        button {
+            padding:0.5rem 1rem !important;
+            &:hover {
+                background-color: #00355b !important;
+                color: white;
+            }
+        }
+    }
+}
+// ------------------chappy section Starts here------------------//
+
+.Dialog-chappy {
+    padding: 1.5rem 14rem 1.5rem 1rem;
+}
+.MuiDialogActions-root  {
+    border-top: 1px solid #D8D8D8;
+    padding:  1rem;
+    button {
+        padding:0.5rem 3rem ;
+        &:hover {
+            background-color: #00355b !important;
+            color: white;
+        }
+    }
+}
 // ------------------Table Style Starts here------------------//
 
 .MuiTableCell-head {

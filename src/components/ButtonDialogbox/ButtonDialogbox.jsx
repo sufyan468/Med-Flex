@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Button from '@mui/material/Button';
+import { Button, Box } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -32,7 +32,13 @@ const ButtonDialogbox = (props) => {
                 onClose={props.dialogCloseHandler}
                 aria-describedby="alert-dialog-slide-description"
             >
-                <DialogTitle sx={{ color: '#032541' }}>What action do you want to perform?</DialogTitle>
+                <Box sx={{ display: 'flex', alignItems: 'center', p: 2, borderBottom: '1px solid #D8D8D8' }}>
+                    <Box className="flex-fill">Action Box</Box>
+                    <Box>X</Box>
+                </Box>
+                <DialogTitle sx={{ color: '#032541' }} className="Dialog-chappy">
+                    What action do you want to perform?
+                </DialogTitle>
                 <DialogContent></DialogContent>
                 <DialogActions>
                     <Button onClick={props.dialogCloseHandler} sx={{ textTransform: 'none', color: '#032541' }}>
