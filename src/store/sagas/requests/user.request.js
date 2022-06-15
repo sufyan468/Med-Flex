@@ -28,3 +28,16 @@ export function loginUserRequest(data) {
     };
     return axios(config);
 }
+
+export function logoutRequest(data) {
+    var config = {
+        method: 'get',
+        url: `${API_URL}api/auth/logout`,
+        headers: {
+            Authorization: `Bearer ${data.access_token}`,
+            'Content-Type': 'application/json',
+        },
+        data: data,
+    };
+    return axios(config);
+}
