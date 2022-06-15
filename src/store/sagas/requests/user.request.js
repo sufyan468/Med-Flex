@@ -16,11 +16,14 @@ export function getUser(data) {
 }
 
 export function loginUserRequest(data) {
-    // return axios.post(`${API_URL}api/auth/login`, data);
     console.log('login data', data);
     var config = {
         method: 'post',
         url: `${API_URL}api/auth/login`,
+        headers: {
+            Authorization: `Bearer ${data.access_token}`,
+            'Content-Type': 'application/json',
+        },
         data: data,
     };
     return axios(config);
