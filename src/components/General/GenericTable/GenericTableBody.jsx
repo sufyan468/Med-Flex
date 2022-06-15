@@ -4,7 +4,7 @@ import { TableBody } from '@mui/material';
 const GenericTableBody = (props) => {
     return (
         <Fragment>
-            <TableBody></TableBody>
+            <TableBody>{props.BodyCells}</TableBody>
         </Fragment>
     );
 };

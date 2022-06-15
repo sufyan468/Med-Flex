@@ -71,3 +71,26 @@ p {
         max-width: 1260px;
     }
 }
+// ------------------Table Style Starts here------------------//
+
+.MuiTableCell-head {
+    color: #1a2733;
+    font-family: 'LATO';
+    height: 23px;
+    font-size: 14px;
+    font-weight: bold;
+    padding: auto 16px;
+    letter-spacing: 0;
+    line-height: 18px;
+}
+.MuiTableCell-body {
+    height: auto;
+}
+.table-row {
+    padding: 10px 16px;
+    color: var(--coal);
+    font-family: 'Lato' !important;
+    font-size: 14px !important;
+    letter-spacing: 0;
+    line-height: 18px !important;
+}
