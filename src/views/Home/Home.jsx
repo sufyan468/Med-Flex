@@ -1,8 +1,9 @@
 import React, { Fragment } from 'react';
 import GenericTable from '../../components/General/GenericTable/GenericTable';
-import { Container, Grid, Box, TableCell, TableRow, TableBody } from '@mui/material';
+import { Container, Grid, Box, TableCell, TableRow, Button } from '@mui/material';
 import ToolDialogbox from '../../components/ToolDialogbox/ToolDialogbox';
 import ButtonDialogbox from '../../components/ButtonDialogbox/ButtonDialogbox';
+import HeaderNavigration from '../../components/General/HeaderNavigation';
 
 const Home = (props) => {
     const [open, setOpen] = React.useState(false);
@@ -249,7 +250,30 @@ const Home = (props) => {
     return (
         <Fragment>
             <Container>
-                <Grid item xs={12} sx={{ alignItems: 'center', height: '100vh' }}>
+                <HeaderNavigration
+                    pageTitle="Dashboard"
+                    pageBtn={
+                        <Button
+                            sx={{
+                                px: 4,
+                                py: 2,
+                                color: 'white',
+                                borderRadius: '8px',
+                                background: '#EE680E',
+                                border: '2px solid',
+                                borderColor: '#EE680E',
+                                '&:hover': {
+                                    color: 'orange',
+                                    background: 'white',
+                                    borderColor: 'orange',
+                                },
+                            }}
+                        >
+                            Products
+                        </Button>
+                    }
+                />
+                <Grid item xs={12} sx={{ alignItems: 'center', height: '100vh', mt: 7 }}>
                     <GenericTable
                         headCells={toolHeadCells}
                         disableTbHeadCheckBox="none"

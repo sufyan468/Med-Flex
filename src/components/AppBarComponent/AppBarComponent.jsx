@@ -60,7 +60,11 @@ export default function PrimarySearchAppBar({ children, to, ...props }) {
                     <Toolbar className="nvabar">
                         <Typography variant="h6" noWrap component="div" sx={{ display: { xs: 'block', sm: 'block' } }}>
                             <NavLink to="/">
-                                <img src="http://www.medflex.ae/images/logosmall3.png" alt="MedFlex Logo" />
+                                <img
+                                    src="http://www.medflex.ae/images/logosmall3.png"
+                                    alt="MedFlex Logo"
+                                    style={{ height: '59px', width: '96px' }}
+                                />
                             </NavLink>
                         </Typography>
 
