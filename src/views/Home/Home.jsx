@@ -1,23 +1,11 @@
 import React, { Fragment } from 'react';
 import GenericTable from '../../components/General/GenericTable/GenericTable';
 import { Container, Grid, Box, TableCell, TableRow, TableBody } from '@mui/material';
-import ToolDialogbox from '../../components/ToolDialogbox/ToolDialogbox';
 import ButtonDialogbox from '../../components/ButtonDialogbox/ButtonDialogbox';
 
-const Home = (props) => {
-    const [open, setOpen] = React.useState(false);
+const Home = () => {
     const [buttonDialogOpen, setButtonDialogOpen] = React.useState(false);
     const [selectedRow, setSelectedRow] = React.useState('');
-
-    const handleClickOpen = (e, index) => {
-        e.preventDefault();
-        setOpen(true);
-        setSelectedRow(index);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
 
     const handleButtonDialogOpen = (e, index) => {
         e.preventDefault();
@@ -259,8 +247,7 @@ const Home = (props) => {
                                 <TableRow
                                     key={row.id}
                                     sx={{ padding: '16px 16px', cursor: 'pointer' }}
-                                    // onClick={(e) => handleClickOpen(e, index)}
-                                    onClick={handleButtonDialogOpen}
+                                    onClick={(e) => handleButtonDialogOpen(e, index)}
                                 >
                                     <TableCell sx={{ align: 'left', width: '2%' }}>
                                         <Box className="flex-fill">{row.id}</Box>
@@ -298,23 +285,12 @@ const Home = (props) => {
                     />
                     {buttonDialogOpen ? (
                         <ButtonDialogbox
-                            // toolName={rows[selectedRow].toolName}
-                            // rows={rows}
+                            toolName={rows[selectedRow].toolName}
                             open={buttonDialogOpen}
                             dialogOpenHandler={handleButtonDialogOpen}
                             dialogCloseHandler={handleButtonDialogClose}
                         />
                     ) : null}
-
-                    {/* {open ? (
-                        <ToolDialogbox
-                            toolName={rows[selectedRow].toolName}
-                            cost={rows[selectedRow].initialCost}
-                            open={open}
-                            dialogOpenHandler={handleClickOpen}
-                            dialogCloseHandler={handleClose}
-                        />
-                    ) : null} */}
                 </Grid>
             </Container>
         </Fragment>
