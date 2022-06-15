@@ -3,15 +3,23 @@ import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { AppBarComponent } from '../../components';
 import Footer from '../../components/Footer/Footer';
 import CustomizedSnackbars from '../../views/Snackbar/CustomSnackbar';
+import { setLoginUser } from '../../store/slices/user.slice';
+import { useSelector } from 'react-redux';
 
 const AppContent = ({ routes }) => {
     const navigate = useNavigate();
     const location = useLocation();
+    const { isUserLogin } = useSelector((state) => state.user);
 
     useEffect(() => {
         location.pathname === '/' && navigate('/login');
         location.pathname === '' && navigate('/login');
-    }, []);
+        if (isUserLogin === true) {
+            navigate('/home');
+        } else {
+            navigate('/login');
+        }
+    }, [isUserLogin]);
 
     return (
         <Fragment>

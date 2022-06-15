@@ -1,15 +1,43 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
+import { Box, Button } from '@mui/material';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
+import { logOutUser } from '../../store/slices/user.slice';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { showSnackBar } from '../../store/slices/snackbar.slice';
 
 export default function PrimarySearchAppBar({ children, to, ...props }) {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const snackbarObject = {
+        type: '',
+        message: '',
+        open: false,
+    };
+
+    const logout = () => {
+        console.log('logout');
+        dispatch(logOutUser({ userLogOut: true }));
+        localStorage.clear();
+        navigate('/login');
+        dispatchSnackBar('success', 'Logout Successfully', true);
+    };
+
+    const dispatchSnackBar = (type, message, open) => {
+        snackbarObject.type = type;
+        snackbarObject.message = message;
+        snackbarObject.open = open;
+        dispatch(showSnackBar(snackbarObject));
+    };
+
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -48,7 +76,18 @@ export default function PrimarySearchAppBar({ children, to, ...props }) {
             </li>
 
             <li className="nav-link">
-                <NavLink to="/questions">LogOut</NavLink>
+                <Button
+                    onClick={logout}
+                    style={{
+                        outline: 'none',
+                        background: 'transparent',
+                        border: 'none',
+                        fontWeight: 'bold',
+                        cursor: 'pointer',
+                    }}
+                >
+                    LogOut
+                </Button>
             </li>
         </Menu>
     );
@@ -82,7 +121,19 @@ export default function PrimarySearchAppBar({ children, to, ...props }) {
                             </li>
 
                             <li className="nav-link">
-                                <NavLink to="/offers">Logout</NavLink>
+                                <Button
+                                    onClick={logout}
+                                    style={{
+                                        outline: 'none',
+                                        background: 'transparent',
+                                        border: 'none',
+                                        color: 'white',
+                                        fontWeight: 'bold',
+                                        cursor: 'pointer',
+                                    }}
+                                >
+                                    LogOut
+                                </Button>
                             </li>
                         </Box>
                         <Box sx={{ display: { xs: 'flex', md: 'none' } }}>

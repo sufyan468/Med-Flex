@@ -1,10 +1,10 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { Grid, Typography, Button, Box, TextField } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import CssBaseline from '@mui/material/CssBaseline';
 import Footer from '../Footer/Footer';
 import AppLogo from '../General/LazyLoading/AppLogo';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { showSnackBar } from '../../store/slices/snackbar.slice';
 import { loginUser } from '../../store/slices/user.slice';
 
@@ -15,6 +15,8 @@ const defaultFormInput = {
 const LoginPage = (props) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const { isApiDone } = useSelector((state) => state.user);
+
     const [formInput, setFormInput] = useState(defaultFormInput);
 
     const snackbarObject = {
@@ -23,6 +25,15 @@ const LoginPage = (props) => {
         open: false,
     };
 
+    useEffect(() => {
+        if (isApiDone === true) {
+            // dispatchSnackBar('success', 'UserLogin Successfully', true);
+            // dispatch(loginUser());
+            navigate('/home');
+        } else {
+            navigate('/login');
+        }
+    }, []);
     const handleInputChange = (name, value) => {
         setFormInput({
             ...formInput,
@@ -51,7 +62,6 @@ const LoginPage = (props) => {
             dispatchSnackBar('error', 'Please enter password', true);
         } else {
             dispatch(loginUser({ email: loginUserObject.email, password: loginUserObject.password }));
-            dispatchSnackBar('success', 'User created successfully', true);
             navigate('/home');
         }
     };
