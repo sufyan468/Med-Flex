@@ -12,20 +12,11 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 const ButtonDialogbox = (props) => {
-    console.log('Props ==>', props);
     const [open, setOpen] = React.useState(false);
-    const [selectedRow, setSelectedRow] = React.useState('');
 
-    // const [open, setOpen] = React.useState(false);
-
-    // const handleClose = () => {
-    //     setOpen(false);
-    // };
-
-    const handleClickOpen = (e, index) => {
+    const handleClickOpen = (e) => {
         e.preventDefault();
         setOpen(true);
-        setSelectedRow(index);
     };
 
     const handleClose = () => {
@@ -42,12 +33,7 @@ const ButtonDialogbox = (props) => {
                 aria-describedby="alert-dialog-slide-description"
             >
                 <DialogTitle sx={{ color: '#032541' }}>What action do you want to perform?</DialogTitle>
-                <DialogContent>
-                    {/* <DialogContentText id="alert-dialog-slide-description">
-                        Let Google help apps determine location. This means sending anonymous location data to Google,
-                        even when no apps are running.
-                    </DialogContentText> */}
-                </DialogContent>
+                <DialogContent></DialogContent>
                 <DialogActions>
                     <Button onClick={props.dialogCloseHandler} sx={{ textTransform: 'none', color: '#032541' }}>
                         Return Tool
@@ -55,22 +41,17 @@ const ButtonDialogbox = (props) => {
                     <Button
                         variant="contained"
                         sx={{ textTransform: 'none', color: 'white', backgroundColor: '#032541' }}
-                        // onClick={props.dialogCloseHandler}
-                        onClick={(e) => handleClickOpen(e, props.index)}
+                        onClick={handleClickOpen}
                     >
                         Take Out
                     </Button>
-
-                    {/* <Button onClick={props.dialogCloseHandler}>Disagree</Button>
-                    <Button onClick={props.dialogCloseHandler}>Agree</Button> */}
                 </DialogActions>
             </Dialog>
 
             {open ? (
                 <ToolDialogbox
-                    // toolName={props.rows[selectedRow].toolName}
-                    // cost={props.rows[selectedRow].initialCost}
                     open={open}
+                    toolName={props.toolName}
                     dialogOpenHandler={handleClickOpen}
                     dialogCloseHandler={handleClose}
                 />
