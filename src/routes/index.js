@@ -29,6 +29,12 @@ const routData = [
         component: reviews.Login,
         requiresAuth: false,
     },
+    {
+        id: 'route-002',
+        path: '/my-tools',
+        component: reviews.MyAllocatedTools,
+        requiresAuth: false,
+    },
 
     {
         id: 'route-000',

@@ -24,7 +24,7 @@ const usersSlice = createSlice({
             state.user = userData;
             state.isApiDone = true;
             state.isUserLogin = true;
-            console.log('🚀 ~ file: user.slice.js ~ line 22 ~ setLoginUser ~ userData', userData);
+            // console.log('🚀 ~ file: user.slice.js ~ line 22 ~ setLoginUser ~ userData', userData);
         },
         logOutUser(state, action) {},
         setLogOutUser(state, action) {
