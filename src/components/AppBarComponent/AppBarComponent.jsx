@@ -72,7 +72,7 @@ export default function PrimarySearchAppBar({ children, to, ...props }) {
                 <NavLink to="/home">Home</NavLink>
             </li>
             <li className="nav-link">
-                <NavLink to="/members">Products</NavLink>
+                <NavLink to="/my-tools">My Tools</NavLink>
             </li>
 
             <li className="nav-link">
@@ -117,7 +117,7 @@ export default function PrimarySearchAppBar({ children, to, ...props }) {
                                 <NavLink to="/home">Home</NavLink>
                             </li>
                             <li className="nav-link">
-                                <NavLink to="/products">Products</NavLink>
+                                <NavLink to="/my-tools">My Tools</NavLink>
                             </li>
 
                             <li className="nav-link">

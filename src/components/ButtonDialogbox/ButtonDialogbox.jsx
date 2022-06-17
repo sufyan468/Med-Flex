@@ -34,22 +34,24 @@ const ButtonDialogbox = (props) => {
             >
                 <Box sx={{ display: 'flex', alignItems: 'center', p: 2, borderBottom: '1px solid #D8D8D8' }}>
                     <Box className="flex-fill">Action Box</Box>
-                    <Box>X</Box>
+                    <Box sx={{ cursor: 'pointer' }} onClick={props.dialogCloseHandler}>
+                        X
+                    </Box>
                 </Box>
                 <DialogTitle sx={{ color: '#032541' }} className="Dialog-chappy">
                     What action do you want to perform?
                 </DialogTitle>
                 <DialogContent></DialogContent>
                 <DialogActions>
-                    <Button onClick={props.dialogCloseHandler} sx={{ textTransform: 'none', color: '#032541' }}>
+                    {/* <Button onClick={props.dialogCloseHandler} sx={{ textTransform: 'none', color: '#032541' }}>
                         Return Tool
-                    </Button>
+                    </Button> */}
                     <Button
                         variant="contained"
                         sx={{ textTransform: 'none', color: 'white', backgroundColor: '#032541' }}
                         onClick={handleClickOpen}
                     >
-                        Take Out
+                        {props.btnText}
                     </Button>
                 </DialogActions>
             </Dialog>

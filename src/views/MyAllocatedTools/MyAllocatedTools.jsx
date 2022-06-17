@@ -5,14 +5,13 @@ import ButtonDialogbox from '../../components/ButtonDialogbox/ButtonDialogbox';
 import HeaderNavigration from '../../components/General/HeaderNavigation';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { getTools, getToolsList } from '../../store/slices/user.tool.slice';
+import { getTools } from '../../store/slices/user.tool.slice';
 
-const Home = () => {
+const MyAllocatedTools = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { toolsListData } = useSelector((state) => state.tools.toolsList);
-    console.log('data in Home component =>', toolsListData);
-    const [tools, setTools] = React.useState([]);
+    const data = useSelector((state) => state.tools);
+    console.log('data in Home component =>', data);
     const [buttonDialogOpen, setButtonDialogOpen] = React.useState(false);
     const [selectedRow, setSelectedRow] = React.useState('');
 
@@ -27,11 +26,8 @@ const Home = () => {
     };
 
     useEffect(() => {
-        dispatch(getToolsList());
+        dispatch(getTools());
     }, []);
-    useEffect(() => {
-        setTools(toolsListData);
-    }, [toolsListData]);
 
     const toolHeadCells = [
         {
@@ -253,14 +249,14 @@ const Home = () => {
     return (
         <Fragment>
             <Container>
-                <HeaderNavigration pageTitle="Tools" />
+                <HeaderNavigration pageTitle="Dashboard" />
                 <Grid item xs={12} sx={{ alignItems: 'center', height: '100vh', mt: 7 }}>
                     <GenericTable
                         headCells={toolHeadCells}
                         disableTbHeadCheckBox="none"
                         BodyCells={
-                            toolsListData &&
-                            toolsListData.map((row, index) => (
+                            rows &&
+                            rows.map((row, index) => (
                                 <TableRow
                                     key={row.id}
                                     sx={{ padding: '16px 16px', cursor: 'pointer' }}
@@ -270,7 +266,7 @@ const Home = () => {
                                         <Box className="flex-fill">{row.id}</Box>
                                     </TableCell>
                                     <TableCell sx={{ align: 'left', width: '18%' }}>
-                                        <Box className="flex-fill">{row.name}</Box>
+                                        <Box className="flex-fill">{row.toolName}</Box>
                                     </TableCell>
                                     <TableCell sx={{ align: 'left', width: '10%' }}>
                                         <Box className="flex-fill">{row.manufacturer}</Box>
@@ -279,22 +275,22 @@ const Home = () => {
                                         <Box className="flex-fill">{row.model}</Box>
                                     </TableCell>
                                     <TableCell sx={{ align: 'left', width: '10%' }}>
-                                        <Box className="flex-fill">{row.serial_number}</Box>
+                                        <Box className="flex-fill">{row.serialNumber}</Box>
                                     </TableCell>
                                     <TableCell sx={{ align: 'left', width: '10%' }}>
-                                        <Box className="flex-fill">{row.date_of_purchase}</Box>
+                                        <Box className="flex-fill">{row.purchaseDate}</Box>
                                     </TableCell>
                                     <TableCell sx={{ align: 'left', width: '10%' }}>
-                                        <Box className="flex-fill">{row.next_calibration_due_date}</Box>
+                                        <Box className="flex-fill">{row.lastCalibrationDate}</Box>
                                     </TableCell>
                                     <TableCell sx={{ align: 'left', width: '10%' }}>
-                                        <Box className="flex-fill">{row.initial_location}</Box>
+                                        <Box className="flex-fill">{row.location}</Box>
                                     </TableCell>
                                     <TableCell sx={{ align: 'left', width: '10%' }}>
-                                        <Box className="flex-fill">{row.cost}</Box>
+                                        <Box className="flex-fill">{row.initialCost}</Box>
                                     </TableCell>
                                     <TableCell sx={{ align: 'left', width: '10%' }}>
-                                        <Box className="flex-fill">{row.cost_depreciation_percentage_per_year}</Box>
+                                        <Box className="flex-fill">{row.costDepreciation}</Box>
                                     </TableCell>
                                 </TableRow>
                             ))
@@ -302,8 +298,8 @@ const Home = () => {
                     />
                     {buttonDialogOpen ? (
                         <ButtonDialogbox
-                            btnText="Take Out"
-                            toolName={toolsListData[selectedRow].toolName}
+                            btnText="Return"
+                            toolName={rows[selectedRow].toolName}
                             open={buttonDialogOpen}
                             dialogOpenHandler={handleButtonDialogOpen}
                             dialogCloseHandler={handleButtonDialogClose}
@@ -315,4 +311,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default MyAllocatedTools;
