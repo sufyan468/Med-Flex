@@ -12,6 +12,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 const ButtonDialogbox = (props) => {
+    console.log('Props in Button Modal ==>', props);
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = (e) => {
@@ -39,7 +40,7 @@ const ButtonDialogbox = (props) => {
                     </Box>
                 </Box>
                 <DialogTitle sx={{ color: '#032541' }} className="Dialog-chappy">
-                    What action do you want to perform?
+                    Do you want to take equipment out?
                 </DialogTitle>
                 <DialogContent></DialogContent>
                 <DialogActions>
@@ -60,6 +61,7 @@ const ButtonDialogbox = (props) => {
                 <ToolDialogbox
                     open={open}
                     toolName={props.toolName}
+                    serialNumber={props.serialNumber}
                     dialogOpenHandler={handleClickOpen}
                     dialogCloseHandler={handleClose}
                 />
