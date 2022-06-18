@@ -17,7 +17,8 @@ const AppContent = ({ routes }) => {
         if (isUserLogin === true) {
             navigate('/home');
         } else {
-            navigate('/login');
+            location.pathname === '/signup' && navigate('/signup');
+            // navigate('/login');
         }
     }, [isUserLogin]);
 

@@ -254,7 +254,7 @@ const Home = () => {
         <Fragment>
             <Container>
                 <HeaderNavigration pageTitle="Tools" />
-                <Grid item xs={12} sx={{ alignItems: 'center', height: '100vh', mt: 7 }}>
+                <Grid item xs={12} style={{ alignItems: 'center', marginBottom: '5rem', marginTop: '3rem' }}>
                     <GenericTable
                         headCells={toolHeadCells}
                         disableTbHeadCheckBox="none"
