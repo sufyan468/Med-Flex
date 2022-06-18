@@ -24,13 +24,15 @@ export function* handleSignUp(action) {
 
 export function* handleLogin(action) {
     try {
+        console.log('response of the tools =>', response);
+
         const response = yield retry(0, 0, loginUserRequest, action.payload);
         const { data } = response;
         console.log('Data from login Response ==>', data);
         const loginUserData = data.payload;
         const { access_token } = loginUserData;
         localStorage.setItem('access_token', access_token);
-        // console.log('Access Token in localstore =>', access_token);
+        console.log('Access Token in localstore =>', access_token);
         yield put(setLoginUser({ loginUserData }));
     } catch (error) {
         console.log('Login API Error =>', error);
