@@ -24,9 +24,8 @@ export function* handleSignUp(action) {
 
 export function* handleLogin(action) {
     try {
-        console.log('response of the tools =>', response);
-
         const response = yield retry(0, 0, loginUserRequest, action.payload);
+        // console.log('response of the tools =>', response);
         const { data } = response;
         console.log('Data from login Response ==>', data);
         const loginUserData = data.payload;

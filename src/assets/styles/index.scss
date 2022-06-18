@@ -76,11 +76,11 @@ p {
     .Dialog-chappy {
         padding: 1.5rem 1rem !important;
     }
-    .MuiDialogActions-root  {
-        border-top: 1px solid #D8D8D8;
-        padding:  1rem;
+    .MuiDialogActions-root {
+        border-top: 1px solid #d8d8d8;
+        padding: 1rem;
         button {
-            padding:0.5rem 1rem !important;
+            padding: 0.5rem 1rem !important;
             &:hover {
                 background-color: #00355b !important;
                 color: white;
@@ -93,11 +93,11 @@ p {
 .Dialog-chappy {
     padding: 1.5rem 14rem 1.5rem 1rem;
 }
-.MuiDialogActions-root  {
-    border-top: 1px solid #D8D8D8;
-    padding:  1rem;
+.MuiDialogActions-root {
+    border-top: 1px solid #d8d8d8;
+    padding: 1rem;
     button {
-        padding:0.5rem 3rem ;
+        padding: 0.5rem 3rem;
         &:hover {
             background-color: #00355b !important;
             color: white;
@@ -126,4 +126,14 @@ p {
     font-size: 14px !important;
     letter-spacing: 0;
     line-height: 18px !important;
+}
+
+// ------------------Table Style Starts here------------------//
+
+.sigCanvas {
+    // border: 3px solid red;
+    margin-top: 0.5rem;
+    height: 300px;
+    width: 100%;
+    background-color: var(--body-bg);
 }

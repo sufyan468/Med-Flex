@@ -8,7 +8,7 @@ import { setTools } from '../../slices/user.tool.slice';
 export function* handleAllTools(action) {
     try {
         const accessToken = localStorage.getItem('access_token');
-        // console.log('Access Token in all tools call ==>', accessToken);
+        console.log('Access Token in all tools call ==>', accessToken);
         const response = yield retry(0, 0, getAllTools, accessToken);
         // console.log('Response of Tools list API ==>', response);
         const { data } = response.data;

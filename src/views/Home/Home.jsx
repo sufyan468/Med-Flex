@@ -5,11 +5,10 @@ import ButtonDialogbox from '../../components/ButtonDialogbox/ButtonDialogbox';
 import HeaderNavigration from '../../components/General/HeaderNavigation';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { getTools, getToolsList } from '../../store/slices/user.tool.slice';
+import { getToolsList } from '../../store/slices/user.tool.slice';
 
 const Home = () => {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
     const { toolsListData } = useSelector((state) => state.tools.toolsList);
     console.log('data in Home component =>', toolsListData);
     const [tools, setTools] = React.useState([]);
@@ -17,6 +16,7 @@ const Home = () => {
     const [selectedRow, setSelectedRow] = React.useState('');
 
     const handleButtonDialogOpen = (e, index) => {
+        console.log('index =>', index);
         e.preventDefault();
         setButtonDialogOpen(true);
         setSelectedRow(index);
@@ -125,131 +125,6 @@ const Home = () => {
         },
     ];
 
-    function createData(
-        id,
-        toolName,
-        manufacturer,
-        model,
-        serialNumber,
-        purchaseDate,
-        lastCalibrationDate,
-        location,
-        initialCost,
-        costDepreciation,
-    ) {
-        return {
-            id,
-            toolName,
-            manufacturer,
-            model,
-            serialNumber,
-            purchaseDate,
-            lastCalibrationDate,
-            location,
-            initialCost,
-            costDepreciation,
-        };
-    }
-
-    const rows = [
-        createData(
-            '1',
-            'Hospital Stretcher',
-            'John Doe',
-            '892134',
-            'JFK-11232',
-            '31-9-2021',
-            '17-2-2022',
-            'UAE',
-            '1000AED',
-            '10%',
-        ),
-        createData(
-            '2',
-            'Defibrillator',
-            'Johnson Gill',
-            '267437',
-            'DEF-12667',
-            '01-1-2019',
-            '12-2-2019',
-            'Oman',
-            '1500AED',
-            '17%',
-        ),
-        createData(
-            '3',
-            'Anesthesia Machine',
-            'Abraham',
-            '334098',
-            'GCV-12324',
-            '16-09-2020',
-            '12-01-2021',
-            'Oman',
-            '1500AED',
-            '17%',
-        ),
-        createData(
-            '4',
-            'Patient Monitor',
-            'Abner',
-            '234543',
-            'ABX-11309',
-            '01-06-2016',
-            '19-06-2020',
-            'Oman',
-            '1500AED',
-            '17%',
-        ),
-        createData(
-            '5',
-            'Sterilizers',
-            'Aamanda',
-            '234432',
-            'SBF-11067',
-            '28-02-2011',
-            '12-09-2022',
-            'Oman',
-            '1500AED',
-            '17%',
-        ),
-        createData(
-            '6',
-            'Defibrillator',
-            'Aamiya',
-            '098887',
-            'XCB-00909',
-            '01-01-2010',
-            '12-09-2021',
-            'Oman',
-            '1500AED',
-            '17%',
-        ),
-        createData(
-            '7',
-            'EKG/ECG Machines',
-            'Bravo Cena',
-            '321221',
-            'NMY-64564',
-            '01-07-2005',
-            '12-03-2022',
-            'Oman',
-            '1500AED',
-            '17%',
-        ),
-        createData(
-            '8',
-            'Surgical Tables',
-            'Xavier',
-            '323323',
-            'POL-45671',
-            '01-1-2020',
-            '12-2-2021',
-            'Oman',
-            '1500AED',
-            '17%',
-        ),
-    ];
-
     return (
         <Fragment>
             <Container>
@@ -302,8 +177,9 @@ const Home = () => {
                     />
                     {buttonDialogOpen ? (
                         <ButtonDialogbox
-                            btnText="Take Out"
-                            toolName={toolsListData[selectedRow].toolName}
+                            btnText="Yes"
+                            toolName={toolsListData[selectedRow].name}
+                            serialNumber={toolsListData[selectedRow].serial_number}
                             open={buttonDialogOpen}
                             dialogOpenHandler={handleButtonDialogOpen}
                             dialogCloseHandler={handleButtonDialogClose}
