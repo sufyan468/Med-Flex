@@ -1,5 +1,5 @@
 import { put, retry } from 'redux-saga/effects';
-import { getUserAllocatedTools, getAllTools } from '../requests/user.tools.request';
+import { getUserAllocatedTools, getAllTools, getAllocatedTools } from '../requests/user.tools.request';
 import { setToolsList } from '../../slices/user.tool.slice';
 import { showSnackBar } from '../../slices/snackbar.slice';
 
@@ -20,14 +20,22 @@ export function* handleAllTools(action) {
     }
 }
 
+export function* handleAllocatedTools(action, data, tool_id, return_date, location_of_work) {
+    try {
+        console.log('payload:::', action);
+        const response = yield retry(0, 0, getAllocatedTools, action.payload);
+        console.log('response of post call =>', response);
+    } catch (error) {
+        console.log('Error =>', error);
+    }
+}
+
 export function* handleGetAllocatedTools(action) {
     try {
         const response = yield retry(0, 0, getUserAllocatedTools, action.payload);
         console.log('response ==>', response);
         const { data } = response;
         console.log('Data on User allocated tools response ==>', data);
-        // const userData = JSON.parse(data);
-        // yield put(setTools({ userData }));
     } catch (error) {
         // const snackbarObject = {
         //     type: 'error',

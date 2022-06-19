@@ -1,14 +1,22 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Button, Box, Typography } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import SignatureCanvas from 'react-signature-canvas';
+import SignaturePad from 'react-signature-canvas';
+import { getAllocatedTools } from '../../store/slices/user.tool.slice';
+import { useSelector, useDispatch } from 'react-redux';
 
 const ToolDialogbox = (props) => {
+    const dispatch = useDispatch();
+    const data = useSelector((state) => state.tools);
+    console.log('data in dialog box =>', data);
+    const [allocatedTools, setAllocatedTools] = useState([]);
     let sigPad = useRef({});
+    const sigPadImg = useRef({});
+    const [imageURL, setImageURL] = useState('');
     const { toolName, dialogCloseHandler, handleClose, open } = props;
     // const save = () => {
     //     sigPad.current.save();
@@ -16,6 +24,23 @@ const ToolDialogbox = (props) => {
     const clear = () => {
         sigPad.current.clear();
     };
+
+    const trim = () => {
+        // console.log(sigPad.current.getTrimmedCanvas().toDataURL('image/png'));
+
+        setImageURL(sigPad.current.getTrimmedCanvas().toDataURL('image/png'));
+    };
+
+    // useEffect(() => {
+    //     dispatch(getAllocatedTools);
+    // }, []);
+
+    useEffect(() => {
+        dispatch(getAllocatedTools());
+    }, []);
+    useEffect(() => {
+        setAllocatedTools(data);
+    }, [data]);
 
     return (
         <div>
@@ -33,10 +58,21 @@ const ToolDialogbox = (props) => {
                         <Typography variant="h3" sx={{ mt: '1rem', color: '#032541' }}>
                             Signature Box
                         </Typography>
-                        <SignatureCanvas penColor="#032541" canvasProps={{ className: 'sigCanvas' }} ref={sigPad} />
+                        <SignaturePad penColor="white" canvasProps={{ className: 'sigCanvas' }} ref={sigPad} />
                     </Box>
+                    {/* <Box sx={{ textAlign: 'right', height: '300px' }}>
+                        {imageURL ? <img ref={sigPad} src={imageURL} /> : null}
+                    </Box> */}
+                    {imageURL ? (
+                        <>
+                            <Typography variant="h3">Your signature are below:</Typography>
+                            <Box sx={{ textAlign: 'right', height: '10%', background: 'orange' }}>
+                                <img ref={sigPad} src={imageURL} />
+                            </Box>
+                        </>
+                    ) : null}
                 </DialogContent>
-                <DialogActions>
+                <DialogActions sx={{ display: 'flex', justifyContent: 'space-around' }}>
                     <Button
                         sx={{
                             textTransform: 'none',
@@ -47,15 +83,22 @@ const ToolDialogbox = (props) => {
                                 background: '#032541',
                             },
                         }}
-                        onClick={clear}
+                        onClick={trim}
                     >
-                        Clear
+                        Trim
                     </Button>
+
                     <Button
                         sx={{ textTransform: 'none', color: 'white', background: '#032541' }}
                         onClick={dialogCloseHandler}
                     >
                         Cancel
+                    </Button>
+                    <Button
+                        sx={{ textTransform: 'none', color: 'white', background: '#032541' }}
+                        // onClick={dialogCloseHandler}
+                    >
+                        Submit
                     </Button>
                 </DialogActions>
             </Dialog>
