@@ -3,14 +3,14 @@ const userToolSlice = createSlice({
     name: 'userAllocatedTools',
     initialState: {
         allocatedTools: [],
-        userTool: { tool_id: '', return_date: '', location_of_work: '', signature: '' },
+        userTool: {},
         toolsList: [],
     },
     reducers: {
         getTools(state, action) {},
         setTools(state, action) {
             const userTools = action.payload;
-            state.tools = userTools;
+            state.allocatedTools = userTools;
         },
         getToolsList(state, action) {},
         setToolsList(state, action) {
@@ -19,12 +19,17 @@ const userToolSlice = createSlice({
         },
         getAllocatedTools(state, action) {},
         setAllocatedTools(state, action) {
-            const allocatedToolsList = action.payload;
-            state.tool_id = allocatedToolsList.tool_id;
-            state.return_date = allocatedToolsList.return_date;
-            state.location_of_work = allocatedToolsList.location_of_work;
-            state.signature = allocatedToolsList.signature;
-            state.toolsList = allocatedToolsList;
+            const allocatedTools = action.payload;
+            state.allocatedTools = allocatedTools;
+            // const userTool = userTool;
+            // const userTool = userTool;
+            // const allocatedToolsList = action.payload;
+            // state.tool_id = allocatedToolsList.tool_id;
+            // state.return_date = allocatedToolsList.return_date;
+            // state.location_of_work = allocatedToolsList.location_of_work;
+            // state.signature = allocatedToolsList.signature;
+            // state.userTool = allocatedToolsList;
+            // state.toolsList = allocatedToolsList;
         },
     },
 });

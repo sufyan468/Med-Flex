@@ -16,14 +16,14 @@ const ToolDialogbox = (props) => {
     const { userTool } = useSelector((state) => state.tools);
 
     const trim = () => {
-        // console.log(sigPad.current.getTrimmedCanvas().toDataURL('image/png'));
+        console.log('signature url:::', sigPad.current.getTrimmedCanvas().toDataURL('image/png'));
         setSignature(sigPad.current.getTrimmedCanvas().toDataURL('image/png'));
     };
     const data = {
         tool_id: tool_id,
         return_date: return_date,
         location_of_work: location_of_work,
-        signature: signature,
+        // signature: signature,
     };
 
     console.log('data in dialog box =>', data);

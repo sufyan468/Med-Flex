@@ -6,7 +6,7 @@ const { API_URL } = API_CONSTANTS;
 export function getAllTools(data) {
     var config = {
         method: 'get',
-        url: `${API_URL}api/tools`,
+        url: `${API_URL}api/tools/available`,
         headers: {
             Authorization: `Bearer ${localStorage.getItem('access_token')}`,
         },
@@ -33,7 +33,7 @@ export function getAllTools(data) {
 //     return axios(config);
 // }
 
-export function getAllocatedTools(tool_id, return_date, location_of_work, signature) {
+export function getAllocatedTools(tool_id, return_date, location_of_work) {
     // console.log('data', data);
     // let formData = new FormData();
     // formData.append('tool_id', tool_id);
@@ -45,9 +45,8 @@ export function getAllocatedTools(tool_id, return_date, location_of_work, signat
         tool_id: tool_id,
         return_date: return_date,
         location_of_work: location_of_work,
-        signature: signature,
+        // signature: signature,
     };
-
     var config = {
         method: 'post',
         url: `${API_URL}api/tools/allocation`,
@@ -57,14 +56,7 @@ export function getAllocatedTools(tool_id, return_date, location_of_work, signat
             'Content-Type': 'application/json',
         },
     };
-    axios(config)
-        .then((response) => {
-            // console.log('response in request =>', config);
-            console.log(JSON.stringify(response.data));
-        })
-        .catch((error) => {
-            console.log(error);
-        });
+    return axios(config);
 }
 
 export function getUserAllocatedTools(data) {
@@ -74,7 +66,7 @@ export function getUserAllocatedTools(data) {
         url: `${API_URL}api/tools/allocation`,
         headers: {
             Authorization: `Bearer ${localStorage.getItem('access_token')}`,
-            'Content-Type': 'application/json',
+            // 'Content-Type': 'application/json',
         },
         data: data,
     };
