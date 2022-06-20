@@ -12,7 +12,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 const ButtonDialogbox = (props) => {
-    console.log('Props in Button Modal ==>', props);
+    // console.log('Props in Button Modal ==>', props);
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = (e) => {
@@ -60,6 +60,9 @@ const ButtonDialogbox = (props) => {
             {open ? (
                 <ToolDialogbox
                     open={open}
+                    tool_id={props.tool_id}
+                    location_of_work={props.location_of_work}
+                    return_date={props.return_date}
                     toolName={props.toolName}
                     serialNumber={props.serialNumber}
                     dialogOpenHandler={handleClickOpen}

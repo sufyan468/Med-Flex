@@ -178,6 +178,9 @@ const Home = () => {
                     {buttonDialogOpen ? (
                         <ButtonDialogbox
                             btnText="Yes"
+                            tool_id={toolsListData[selectedRow].id}
+                            location_of_work={toolsListData[selectedRow].initial_location}
+                            return_date={toolsListData[selectedRow].next_calibration_due_date}
                             toolName={toolsListData[selectedRow].name}
                             serialNumber={toolsListData[selectedRow].serial_number}
                             open={buttonDialogOpen}

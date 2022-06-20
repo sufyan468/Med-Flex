@@ -20,9 +20,9 @@ export function* handleAllTools(action) {
     }
 }
 
-export function* handleAllocatedTools(action, data, tool_id, return_date, location_of_work) {
+export function* handleAllocatedTools(action) {
     try {
-        console.log('payload:::', action);
+        console.log('payload:::', action.payload);
         const response = yield retry(0, 0, getAllocatedTools, action.payload);
         console.log('response of post call =>', response);
     } catch (error) {

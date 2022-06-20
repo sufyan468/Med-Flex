@@ -3,10 +3,7 @@ const userToolSlice = createSlice({
     name: 'userAllocatedTools',
     initialState: {
         allocatedTools: [],
-        tool_id: '',
-        return_date: '',
-        location_of_work: '',
-        signature: '',
+        userTool: { tool_id: '', return_date: '', location_of_work: '', signature: '' },
         toolsList: [],
     },
     reducers: {
