@@ -1,9 +1,7 @@
 import { put, retry } from 'redux-saga/effects';
 import { getUserAllocatedTools, getAllTools, getAllocatedTools } from '../requests/user.tools.request';
-import { setToolsList } from '../../slices/user.tool.slice';
+import { setToolsList, setTools } from '../../slices/user.tool.slice';
 import { showSnackBar } from '../../slices/snackbar.slice';
-
-import { setTools } from '../../slices/user.tool.slice';
 
 export function* handleAllTools(action) {
     try {
@@ -23,8 +21,11 @@ export function* handleAllTools(action) {
 export function* handleAllocatedTools(action) {
     try {
         console.log('payload:::', action.payload);
+        const accessToken = localStorage.getItem('access_token');
         const response = yield retry(0, 0, getAllocatedTools, action.payload);
-        console.log('response of post call =>', response);
+        // console.log('response of post call =>', response);
+        const { message } = response.data;
+        console.log('data ===>', message);
     } catch (error) {
         console.log('Error =>', error);
     }
@@ -32,10 +33,13 @@ export function* handleAllocatedTools(action) {
 
 export function* handleGetAllocatedTools(action) {
     try {
-        const response = yield retry(0, 0, getUserAllocatedTools, action.payload);
-        console.log('response ==>', response);
-        const { data } = response;
+        const accessToken = localStorage.getItem('access_token');
+        const response = yield retry(0, 0, getUserAllocatedTools, accessToken);
+        // console.log('response ==>', response);
+        const { data } = response.data;
         console.log('Data on User allocated tools response ==>', data);
+        const toolsListData = data;
+        yield put(setTools({ toolsListData }));
     } catch (error) {
         // const snackbarObject = {
         //     type: 'error',

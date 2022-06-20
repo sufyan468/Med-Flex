@@ -10,7 +10,7 @@ import { getToolsList } from '../../store/slices/user.tool.slice';
 const Home = () => {
     const dispatch = useDispatch();
     const { toolsListData } = useSelector((state) => state.tools.toolsList);
-    console.log('data in Home component =>', toolsListData);
+    // console.log('data in Home component =>', toolsListData);
     const [tools, setTools] = React.useState([]);
     const [buttonDialogOpen, setButtonDialogOpen] = React.useState(false);
     const [selectedRow, setSelectedRow] = React.useState('');

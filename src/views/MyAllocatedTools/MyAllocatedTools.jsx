@@ -8,9 +8,10 @@ import { useNavigate } from 'react-router-dom';
 import { getTools } from '../../store/slices/user.tool.slice';
 
 const MyAllocatedTools = () => {
+    const [allocatedTools, setAllocatedTools] = React.useState([]);
+
     const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const data = useSelector((state) => state.tools);
+    const data = useSelector((state) => state.tools.allocatedTools.toolsListData);
     console.log('data in Home component =>', data);
     const [buttonDialogOpen, setButtonDialogOpen] = React.useState(false);
     const [selectedRow, setSelectedRow] = React.useState('');
@@ -26,8 +27,12 @@ const MyAllocatedTools = () => {
     };
 
     useEffect(() => {
-        dispatch(getTools());
+        dispatch(getTools(data));
     }, []);
+
+    useEffect(() => {
+        setAllocatedTools(data);
+    }, [data]);
 
     const toolHeadCells = [
         {
@@ -250,13 +255,13 @@ const MyAllocatedTools = () => {
         <Fragment>
             <Container>
                 <HeaderNavigration pageTitle="Dashboard" />
-                <Grid item xs={12} sx={{ alignItems: 'center', height: '100vh', mt: 7 }}>
+                <Grid item xs={12} sx={{ alignItems: 'center', mt: 7 }}>
                     <GenericTable
                         headCells={toolHeadCells}
                         disableTbHeadCheckBox="none"
                         BodyCells={
-                            rows &&
-                            rows.map((row, index) => (
+                            data &&
+                            data.map((row, index) => (
                                 <TableRow
                                     key={row.id}
                                     sx={{ padding: '16px 16px', cursor: 'pointer' }}
@@ -266,7 +271,7 @@ const MyAllocatedTools = () => {
                                         <Box className="flex-fill">{row.id}</Box>
                                     </TableCell>
                                     <TableCell sx={{ align: 'left', width: '18%' }}>
-                                        <Box className="flex-fill">{row.toolName}</Box>
+                                        <Box className="flex-fill">{row.name}</Box>
                                     </TableCell>
                                     <TableCell sx={{ align: 'left', width: '10%' }}>
                                         <Box className="flex-fill">{row.manufacturer}</Box>
@@ -275,22 +280,22 @@ const MyAllocatedTools = () => {
                                         <Box className="flex-fill">{row.model}</Box>
                                     </TableCell>
                                     <TableCell sx={{ align: 'left', width: '10%' }}>
-                                        <Box className="flex-fill">{row.serialNumber}</Box>
+                                        <Box className="flex-fill">{row.serial_number}</Box>
                                     </TableCell>
                                     <TableCell sx={{ align: 'left', width: '10%' }}>
-                                        <Box className="flex-fill">{row.purchaseDate}</Box>
+                                        <Box className="flex-fill">{row.date_of_purchase}</Box>
                                     </TableCell>
                                     <TableCell sx={{ align: 'left', width: '10%' }}>
-                                        <Box className="flex-fill">{row.lastCalibrationDate}</Box>
+                                        <Box className="flex-fill">{row.next_calibration_due_date}</Box>
                                     </TableCell>
                                     <TableCell sx={{ align: 'left', width: '10%' }}>
-                                        <Box className="flex-fill">{row.location}</Box>
+                                        <Box className="flex-fill">{row.initial_location}</Box>
                                     </TableCell>
                                     <TableCell sx={{ align: 'left', width: '10%' }}>
-                                        <Box className="flex-fill">{row.initialCost}</Box>
+                                        <Box className="flex-fill">{row.cost}</Box>
                                     </TableCell>
                                     <TableCell sx={{ align: 'left', width: '10%' }}>
-                                        <Box className="flex-fill">{row.costDepreciation}</Box>
+                                        <Box className="flex-fill">{row.cost_depreciation_percentage_per_year}</Box>
                                     </TableCell>
                                 </TableRow>
                             ))
