@@ -6,5 +6,5 @@ export const APP_CONSTANTS = {
 };
 
 export const API_CONSTANTS = {
-    API_URL: 'https://4420-86-99-152-60.in.ngrok.io/',
+    API_URL: 'https://5bc6-86-99-152-60.in.ngrok.io/',
 };
