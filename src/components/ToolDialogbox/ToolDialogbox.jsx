@@ -10,37 +10,31 @@ import { getAllocatedTools } from '../../store/slices/user.tool.slice';
 import { useSelector, useDispatch } from 'react-redux';
 
 const ToolDialogbox = (props) => {
+    const [signature, setSignature] = useState('');
+    const { tool_id, return_date, location_of_work, toolName, dialogCloseHandler, handleClose, open } = props;
     const dispatch = useDispatch();
-    const data = useSelector((state) => state.tools);
-    console.log('data in dialog box =>', data);
-    const [allocatedTools, setAllocatedTools] = useState([]);
-    let sigPad = useRef({});
-    const sigPadImg = useRef({});
-    const [imageURL, setImageURL] = useState('');
-    const { toolName, dialogCloseHandler, handleClose, open } = props;
-    // const save = () => {
-    //     sigPad.current.save();
-    // };
-    const clear = () => {
-        sigPad.current.clear();
-    };
+    const { userTool } = useSelector((state) => state.tools);
 
     const trim = () => {
         // console.log(sigPad.current.getTrimmedCanvas().toDataURL('image/png'));
-
-        setImageURL(sigPad.current.getTrimmedCanvas().toDataURL('image/png'));
+        setSignature(sigPad.current.getTrimmedCanvas().toDataURL('image/png'));
+    };
+    const data = {
+        tool_id: tool_id,
+        return_date: return_date,
+        location_of_work: location_of_work,
+        signature: signature,
     };
 
-    // useEffect(() => {
-    //     dispatch(getAllocatedTools);
-    // }, []);
+    console.log('data in dialog box =>', data);
+    let sigPad = useRef({});
 
-    useEffect(() => {
-        dispatch(getAllocatedTools());
-    }, []);
-    useEffect(() => {
-        setAllocatedTools(data);
-    }, [data]);
+    // useEffect(() => {
+    //     dispatch(getAllocatedTools(data));
+    // }, []);
+    // useEffect(() => {
+    //     setAllocatedTools(data);
+    // }, [data]);
 
     return (
         <div>
@@ -60,14 +54,12 @@ const ToolDialogbox = (props) => {
                         </Typography>
                         <SignaturePad penColor="white" canvasProps={{ className: 'sigCanvas' }} ref={sigPad} />
                     </Box>
-                    {/* <Box sx={{ textAlign: 'right', height: '300px' }}>
-                        {imageURL ? <img ref={sigPad} src={imageURL} /> : null}
-                    </Box> */}
-                    {imageURL ? (
+
+                    {signature ? (
                         <>
                             <Typography variant="h3">Your signature are below:</Typography>
                             <Box sx={{ textAlign: 'right', height: '10%', background: 'orange' }}>
-                                <img ref={sigPad} src={imageURL} />
+                                <img ref={sigPad} src={signature} />
                             </Box>
                         </>
                     ) : null}
@@ -97,6 +89,7 @@ const ToolDialogbox = (props) => {
                     <Button
                         sx={{ textTransform: 'none', color: 'white', background: '#032541' }}
                         // onClick={dialogCloseHandler}
+                        onClick={dispatch(getAllocatedTools(data))}
                     >
                         Submit
                     </Button>
